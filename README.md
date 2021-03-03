@@ -1,24 +1,90 @@
 # README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column     |  Type   |  Options     |
+| --------   |  ------ |  ----------- |
+| nickname   |  string |  null: false |
+| email      |  string |  null: false |
+| pass       |  string |  null: false |
+| name       |  string |  null: false |
+| name_kana  |  string |  null: false |
+| birth      |  string |  null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
+- has_many :comments 
+- has_many :addresses
+- has_many :purchases
 
-* Configuration
+##  itemsテーブル
 
-* Database creation
+| Column    |  Type       |  Options       |
+| --------- |  ---------- |  ------------  |
+| name      |  string     |  null: false   |
+| info      |  text       |  null: false   |
+| category  |  string     |  null: false   |
+| sales     |  string     |  null: false   |
+| shipping  |  string     |  null: false   |
+| prefecture|  string     |  null: false   |
+| scheduled |  string     |  null: false   |
+| price     |  string     |  null: false   |
+| content   |  string     |  null: false   |
+| fee       |  string     |  null: false   |
+| profit    |  string     |  null: false   |
+| image     |             |  ActiveStorage |
+| user      |  references | null: false, foreign_key: true|
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to  :user
+- has_many    :comments
+- has_many    :purchases
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchasesテーブル
 
-* Deployment instructions
+| Column      |  Type       |  Options    |
+| ---------   |  ---------- |  ---------- |
+| number      |  string     |  null: false|
+| exp         |  string     |  null: false|
+| cvc         |  string     |  null: false|
+| user        |  references |  null: false, foreign_key: true|
+| item        |  references |  null: false, foreign_key: true|
+| address     |  references | null: false, foreign_key: true |
 
-* ...
+
+### Association
+
+- belongs_to :item
+- belongs_to :user
+- has_one    :address
+
+
+## commentsテーブル
+
+| Column    |  Type       |  Options    |
+| --------- |  ---------- |  ---------- |
+| text      |  text       | null: false |
+| user      |  references | null: false, foreign_key: true |
+| item      |  references | null: false, foreign_key: true |
+
+
+### Association
+
+- belongs_to  :user
+- belongs_to  :item
+
+
+## addressesテーブル
+
+| Column    |  Type       |  Options    |
+| --------- |  ---------- |  ---------- |
+| address   |  text       | null: false |
+| user      |  references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :purchase
+
