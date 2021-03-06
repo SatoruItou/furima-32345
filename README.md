@@ -39,7 +39,7 @@
 
 - belongs_to  :user
 - has_many    :comments
-- has_one    :purchases
+- has_one    :purchase
 
 ## purchasesテーブル
 
@@ -77,14 +77,13 @@
 | Column     |  Type       |  Options    |
 | ---------  |  ---------- |  ---------- |
 | postal_code|  integer    | null: false |
-| prefecture_id|  integer    | null: false |
+| prefecture_id|  integer  | null: false |
 | city       |  string     | null: false |
 | address    |  string     | null: false |
-| building   |  string     | null: true  | 
+| building   |  string     |             | 
 | phone_number| integer    | null: false |
 | user       |  references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
 - belongs_to :purchase
 
