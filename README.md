@@ -6,17 +6,18 @@
 | Column     |  Type   |  Options     |
 | --------   |  ------ |  ----------- |
 | nickname   |  string |  null: false |
-| email      |  string |  null: false |
-| pass       |  string |  null: false |
-| name       |  string |  null: false |
-| name_kana  |  string |  null: false |
-| birth      |  string |  null: false |
+| email      |  string |  null: false, unique: true |
+| encrypted_password       |  string |  null: false |
+| last_name       |  string |  null: false |
+| first_name      |  string |  null: false |
+| last_name_kana  |  string |  null: false |
+| first_name_kana |  string |  null: false |
+| birth      |  date   |  null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments 
-- has_many :addresses
 - has_many :purchases
 
 ##  itemsテーブル
@@ -25,34 +26,28 @@
 | --------- |  ---------- |  ------------  |
 | name      |  string     |  null: false   |
 | info      |  text       |  null: false   |
-| category  |  string     |  null: false   |
-| sales     |  string     |  null: false   |
-| shipping  |  string     |  null: false   |
-| prefecture|  string     |  null: false   |
-| scheduled |  string     |  null: false   |
-| price     |  string     |  null: false   |
-| content   |  string     |  null: false   |
-| fee       |  string     |  null: false   |
-| profit    |  string     |  null: false   |
-| image     |             |  ActiveStorage |
+| price     |  integer    |  null: false   |
+| sales_id     |  integer    | null: false, active_hash   |
+| shipping_id  |  integer    | null: false, active_hash   |
+| prefecture_id|  integer    | null: false, active_hash   |
+| scheduled_id |  integer    | null: false, active_hash   |
+| category_id  |  integer    | null: false, active_hash   |
 | user      |  references | null: false, foreign_key: true|
+
 
 ### Association
 
 - belongs_to  :user
 - has_many    :comments
-- has_many    :purchases
+- has_one    :purchases
 
 ## purchasesテーブル
 
 | Column      |  Type       |  Options    |
 | ---------   |  ---------- |  ---------- |
-| number      |  string     |  null: false|
-| exp         |  string     |  null: false|
-| cvc         |  string     |  null: false|
 | user        |  references |  null: false, foreign_key: true|
 | item        |  references |  null: false, foreign_key: true|
-| address     |  references | null: false, foreign_key: true |
+
 
 
 ### Association
@@ -79,10 +74,15 @@
 
 ## addressesテーブル
 
-| Column    |  Type       |  Options    |
-| --------- |  ---------- |  ---------- |
-| address   |  text       | null: false |
-| user      |  references | null: false, foreign_key: true |
+| Column     |  Type       |  Options    |
+| ---------  |  ---------- |  ---------- |
+| postal_code|  integer    | null: false |
+| prefecture_id|  integer    | null: false |
+| city       |  string     | null: false |
+| address    |  string     | null: false |
+| building   |  string     | null: true  | 
+| phone_number| integer    | null: false |
+| user       |  references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
