@@ -3,7 +3,7 @@ class CreateSales < ActiveRecord::Migration[6.0]
     create_table :sales do |t|
       t.string,  name,      null: false
       t.text,    info,      null: false
-      t.integer, price,     null: false #300円以上のバリデーション？
+      t.integer, price,     null: false 
       t.integer,  sales_id, null: false
       t.integer,  shipping_id, null: false
       t.integer,  prefecture_id, null: false
