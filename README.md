@@ -16,11 +16,11 @@
 
 ### Association
 
-- has_many :items
+- has_many :sales
 - has_many :comments 
 - has_many :purchases
 
-##  itemsテーブル
+##  salesテーブル
 
 | Column    |  Type       |  Options       |
 | --------- |  ---------- |  ------------  |
@@ -46,7 +46,7 @@
 | Column      |  Type       |  Options    |
 | ---------   |  ---------- |  ---------- |
 | user        |  references |  null: false, foreign_key: true|
-| item        |  references |  null: false, foreign_key: true|
+| sale        |  references |  null: false, foreign_key: true|
 
 
 
@@ -63,13 +63,13 @@
 | --------- |  ---------- |  ---------- |
 | text      |  text       | null: false |
 | user      |  references | null: false, foreign_key: true |
-| item      |  references | null: false, foreign_key: true |
+| sale      |  references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to  :user
-- belongs_to  :item
+- belongs_to  :sale
 
 
 ## addressesテーブル
