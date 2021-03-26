@@ -13,8 +13,8 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
   with_options presence: true do
-  validates :nickname
-  validates :birth
+    validates :nickname
+    validates :birth
   end
   has_many :items
 end

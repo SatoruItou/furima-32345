@@ -1,9 +1,9 @@
 class Item < ApplicationRecord
   validates :name, presence: true
   validates :info, presence: true
-  validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9999999 }
+  validates :price, numericality: { only_integer: true, greater_than: 300, less_than: 9_999_999 }
   validates :image, presence: true
-  
+
   belongs_to :user
   has_one_attached :image
 
