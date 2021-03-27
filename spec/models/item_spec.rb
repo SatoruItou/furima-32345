@@ -6,9 +6,9 @@ RSpec.describe Item, type: :model do
       @item = FactoryBot.build(:item)
     end
     context '登録できる時' do
-     it 'name,info,price,sales_id,prefecture_id,scheduled_id,category_id,shipping_id,imageがあると登録できる' do
-       expect(@item).to be_valid
-     end
+      it 'name,info,price,sales_id,prefecture_id,scheduled_id,category_id,shipping_id,imageがあると登録できる' do
+        expect(@item).to be_valid
+      end
     end
 
     context '登録できない時' do
@@ -35,7 +35,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが9999999円以上の場合は登録ができない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than 9999999')
       end
@@ -48,14 +48,13 @@ RSpec.describe Item, type: :model do
       it 'priceが半角英語だけでは登録できない' do
         @item.price = 'test'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
       it 'priceが半角英数混合では登録できない' do
         @item.price = 'test200'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
-
 
       it 'sales_idが選択されていないと登録できない' do
         @item.sales_id = (1)
