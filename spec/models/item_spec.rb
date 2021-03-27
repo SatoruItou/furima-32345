@@ -41,18 +41,29 @@ RSpec.describe Item, type: :model do
     it 'priceが全角の場合登録できないこと' do
       @item.price = '９８７'
       @item.valid?
-      binding.pry
       expect(@item.errors.full_messages).to include('Price is not a number')
     end
+    it 'priceが半角英語だけでは登録できない事' do
+      @item.price = 'test'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+    it 'priceが半角英数混合では登録できない事' do
+      @item.price = 'test200'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
+    end
+
+
     it 'sales_idが選択されていないと登録できない' do
       @item.sales_id = (1)
       @item.valid?
       expect(@item.errors.full_messages).to include('Sales must be other than 1')
     end
     it 'prefecture_idが選択されていないと登録できない' do
-      @item.prefecture_id = (0)
+      @item.prefecture_id = (1)
       @item.valid?
-      expect(@item.errors.full_messages).to include('Prefecture must be other than 0')
+      expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
     end
     it 'scheduled_idが選択されていないと登録できない' do
       @item.scheduled_id = (1)
