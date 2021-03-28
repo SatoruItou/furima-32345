@@ -22,6 +22,14 @@ class ItemsController < ApplicationController
     @user = User.find(@item.user_id)
   end
 
+  def edit
+  end
+
+  def destroy
+    
+  end
+
+
   private
 
   def item_params
