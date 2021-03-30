@@ -35,9 +35,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy(item_params)
-      redirect_to :index
-    end
+    @item.delete
+    redirect_to root_path
   end
 
 
