@@ -39,6 +39,8 @@ class PurchasesController < ApplicationController
   end
 
   def redirect_user_purchase
-    redirect_to root_path if current_user == @item.user && !@item.purchase.nil?
+    if current_user == @item.user || @item.purchase != nil
+     redirect_to root_path 
+    end
   end
 end
