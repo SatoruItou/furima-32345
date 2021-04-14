@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   before_action :unless_item, only: [:edit, :update, :destroy]
   def index
     @items = Item.all.order('created_at DESC')
+  
   end
 
   def new
