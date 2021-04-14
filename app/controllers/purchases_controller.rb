@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_itemId, only: [:index, :create]
   before_action :redirect_user_purchase, only: [:index, :create]
   def index
