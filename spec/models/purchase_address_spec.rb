@@ -3,14 +3,13 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   describe '住所情報と購入履歴の保存' do
     before do
-      @user = FactoryBot.create(:user) 
-      @item = FactoryBot.create(:item) 
-      @purchase_address = FactoryBot.build(:purchase_address, user_id: @user.id, item_id: @item.id)  
+      @user = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item)
+      @purchase_address = FactoryBot.build(:purchase_address, user_id: @user.id, item_id: @item.id)
       sleep 0.1
     end
     context '住所情報が保存できる場合' do
       it '配送先の情報として、郵便番号・都道府県・市区町村・番地・電話番号が必須であること' do
-       
         expect(@purchase_address).to be_valid
       end
       it '建物名が空でも登録できること' do
@@ -63,7 +62,7 @@ RSpec.describe PurchaseAddress, type: :model do
       it '電話番号にハイフンがあると保存できないこと' do
         @purchase_address.phone_number = '090-1234-5678'
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid, Input your phone number")
+        expect(@purchase_address.errors.full_messages).to include('Phone number is invalid, Input your phone number')
       end
 
       it '電話番号が全角英数字だと保存できないこと' do
@@ -71,7 +70,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid, Input your phone number')
       end
-      it '電話番号が12桁以上では登録できないこと'do
+      it '電話番号が12桁以上では登録できないこと' do
         @purchase_address.phone_number = '090123456789'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number is invalid, Input your phone number')
@@ -99,7 +98,6 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("User can't be blank")
       end
       it 'item_idが存在しない場合' do
-        
         @purchase_address.item_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
