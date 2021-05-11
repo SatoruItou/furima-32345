@@ -5,6 +5,9 @@
       <h2 class="page-heading">
         <%= "#{@user.nickname}さんの登録情報"%>
       </h2>
+      <h3 class="form-header-text">
+      <%= link_to "ユーザー情報を編集する", edit_user_path(current_user)  %>
+      </h3>
       <table class="table">
         <tbody>
         <tr>
@@ -25,11 +28,38 @@
         </tr>
         </tbody>
      </table>
-     <h2 class="page-heading">
-    
-      </h2>
-      <div class="user__card">
-      </div>
+     <h2 class="form-header-text">出品リスト</h2>
+    <ul class='item-lists'>
+
+      <%  @items.each do |item|%>
+      <li class='list'>
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%=  image_tag(item.image, class: "item-img") %>
+
+         
+          <% if item.purchase != nil %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+        
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.price %>円<br><%= item.shipping.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+       <% end %>
     </div>
   </div>
   
